@@ -36,7 +36,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
          .should('have.value', '')
    })
 
-   it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
+   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
       cy.get('#firstName').type('Aldiney')
       cy.get('#lastName').type('Ribeiro')
       cy.get('#email').type('aldiney.ribeiro@gmail.com')
@@ -45,6 +45,29 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       cy.get('button[type="submit"]').click()
 
       cy.get('.error').should('be.visible')
+   })
+
+   it.only('preenche e limpa os campos nome, sobrenome, email e telefone', function() {
+      cy.get('#firstName')
+         .type('Aldiney')
+         .should('have.value', 'Aldiney')
+         .clear()
+         .should('have.value', '')
+      cy.get('#lastName')
+         .type('Ribeiro')
+         .should('have.value', 'Ribeiro')
+         .clear()
+         .should('have.value', '')
+      cy.get('#email')
+         .type('aldiney.ribeiro@gmail.com')
+         .should('have.value', 'aldiney.ribeiro@gmail.com')
+         .clear()
+         .should('have.value', '')
+      cy.get('#phone')
+         .type('123456789')
+         .should('have.value', '123456789')
+         .clear()
+         .should('have.value', '')
    })
 })
 
